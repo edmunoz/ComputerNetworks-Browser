@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+w * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -62,6 +62,7 @@ public class browser extends javax.swing.JFrame {
         jTabbedPane1.addTab("Nueva pestaña", jPanel1);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/back-icon.png"))); // NOI18N
+        jButton1.setToolTipText("Back page");
         jButton1.setName("bntBack"); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +71,7 @@ public class browser extends javax.swing.JFrame {
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/next-icon.png"))); // NOI18N
-        jButton2.setToolTipText("");
+        jButton2.setToolTipText("Next page");
         jButton2.setName("btnNext"); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +83,7 @@ public class browser extends javax.swing.JFrame {
         jTextField1.setToolTipText("");
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh-icon.png"))); // NOI18N
-        jButton3.setToolTipText("");
+        jButton3.setToolTipText("Refresh page");
         jButton3.setName("btnRefresh"); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +92,7 @@ public class browser extends javax.swing.JFrame {
         });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-icon.png"))); // NOI18N
-        jButton4.setToolTipText("");
+        jButton4.setToolTipText("go to home");
         jButton4.setName("btnHome"); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +101,7 @@ public class browser extends javax.swing.JFrame {
         });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search-icon.png"))); // NOI18N
-        jButton5.setToolTipText("");
+        jButton5.setToolTipText("Ir!");
         jButton5.setName("btnSearch"); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
