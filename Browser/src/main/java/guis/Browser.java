@@ -6,8 +6,10 @@
 
 package guis;
 
+import com.sun.nio.sctp.MessageInfo;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -176,11 +178,13 @@ public class Browser extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        metodoGet m = new metodoGet();
+        m.getHtml("");
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnBulletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBulletActionPerformed
-        // TODO add your handling code here:
-        
+        metodoGet m = new metodoGet();
+        m.writeCookie("localhost", "");
     }//GEN-LAST:event_btnBulletActionPerformed
     
     
