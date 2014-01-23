@@ -6,29 +6,36 @@
 
 package Guis;
 
+import Class.BContainer;
 import Class.GetterBrowser;
-import com.sun.nio.sctp.MessageInfo;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+
 
 /**
- *
  * @author Esteban Muñoz
+ * @author Juan Mite
  */
 public class Browser extends javax.swing.JFrame {
-    private ImageIcon ic1 = new ImageIcon("src/main/resources/images/back-icon.png");
-    private ImageIcon ic2 = new ImageIcon("src/main/resources/images/next-icon.png");
-    private ImageIcon ic3 = new ImageIcon("src/main/resources/images/home-icon.png");
-    private ImageIcon ic4 = new ImageIcon("src/main/resources/images/refresh-icon.png");
-    private ImageIcon ic5 = new ImageIcon("src/main/resources/images/search-icon.png");
-    private ImageIcon ic6 = new ImageIcon("src/main/resources/images/bullet-icon.png");
+    //Used for the design of the interface
+    private final ImageIcon ic1 = new ImageIcon("src/main/resources/images/back-icon.png");
+    private final ImageIcon ic2 = new ImageIcon("src/main/resources/images/next-icon.png");
+    private final ImageIcon ic3 = new ImageIcon("src/main/resources/images/home-icon.png");
+    private final ImageIcon ic4 = new ImageIcon("src/main/resources/images/refresh-icon.png");
+    private final ImageIcon ic5 = new ImageIcon("src/main/resources/images/search-icon.png");
+    private final ImageIcon ic6 = new ImageIcon("src/main/resources/images/bullet-icon.png");
+    private final ImageIcon imgIcon = new ImageIcon ("src/main/resources/images/browser.png");
     /**
      * Creates new form browser
      */
     public Browser() {
+        
+        BContainer contenedor = new BContainer("src/main/resources/images/fondo.jpg");
+        setContentPane(contenedor);
         initComponents();
-       this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        this.setIconImage(imgIcon.getImage());
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -44,9 +51,9 @@ public class Browser extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnBack = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         btnHome = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         btnBullet = new javax.swing.JButton();
 
@@ -56,17 +63,18 @@ public class Browser extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 970, Short.MAX_VALUE)
+            .addGap(0, 1046, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 299, Short.MAX_VALUE)
+            .addGap(0, 257, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Nueva pestaña", jPanel1);
 
         btnBack.setIcon(ic1
         );
+        btnBack.setToolTipText("Back page");
         btnBack.setName("bntBack"); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +83,7 @@ public class Browser extends javax.swing.JFrame {
         });
 
         btnNext.setIcon(ic2);
-        btnNext.setToolTipText("");
+        btnNext.setToolTipText("Next page");
         btnNext.setName("btnNext"); // NOI18N
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,11 +91,8 @@ public class Browser extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Century Schoolbook L", 0, 24)); // NOI18N
-        jTextField1.setToolTipText("");
-
         btnHome.setIcon(ic3);
-        btnHome.setToolTipText("");
+        btnHome.setToolTipText("go to home");
         btnHome.setName("btnRefresh"); // NOI18N
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +102,7 @@ public class Browser extends javax.swing.JFrame {
 
         btnRefresh.setIcon(ic4
         );
-        btnRefresh.setToolTipText("");
+        btnRefresh.setToolTipText("Refresh page");
         btnRefresh.setName("btnHome"); // NOI18N
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,8 +110,11 @@ public class Browser extends javax.swing.JFrame {
             }
         });
 
+        jTextField1.setFont(new java.awt.Font("Century Schoolbook L", 0, 24)); // NOI18N
+        jTextField1.setToolTipText("");
+
         btnSearch.setIcon(ic5);
-        btnSearch.setToolTipText("");
+        btnSearch.setToolTipText("Search");
         btnSearch.setName("btnSearch"); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,35 +135,41 @@ public class Browser extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBullet, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBullet, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnRefresh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnBullet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNext, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefresh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBullet, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         pack();
