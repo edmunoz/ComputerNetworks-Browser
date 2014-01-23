@@ -17,6 +17,9 @@ import javax.swing.JFrame;
  * @author Juan Mite
  */
 public class Browser extends javax.swing.JFrame {
+    
+    Loading html;
+    String direccion,fuente;
     //Used for the design of the interface
     private final ImageIcon ic1 = new ImageIcon("src/main/resources/images/back-icon.png");
     private final ImageIcon ic2 = new ImageIcon("src/main/resources/images/next-icon.png");
@@ -49,6 +52,8 @@ public class Browser extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         btnBack = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
@@ -59,15 +64,17 @@ public class Browser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jScrollPane1.setViewportView(jTextPane1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1046, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1046, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 257, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Nueva pestaña", jPanel1);
@@ -194,7 +201,15 @@ public class Browser extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
         GetterBrowser m = new GetterBrowser();
-        m.getHtml("");
+        m.getHtml(direccion);
+        
+        direccion = jTextField1.getText();
+         html = new Loading();
+         fuente = m.getHtml(direccion);
+         
+         jScrollPane1.getViewport().add(jTextPane1);
+         getContentPane().add(jScrollPane1);
+         jTextPane1.setText(fuente);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnBulletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBulletActionPerformed
@@ -211,7 +226,9 @@ public class Browser extends javax.swing.JFrame {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
