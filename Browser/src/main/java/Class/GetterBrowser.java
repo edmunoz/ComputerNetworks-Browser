@@ -1,4 +1,6 @@
-package guis;
+package Class;
+
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,7 +15,7 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.net.Socket;
 
-public class metodoGet{
+public class GetterBrowser{
     public String line="";
     public String html="";
     public String cookie="";

@@ -1,6 +1,6 @@
 package com.computernetworks.browser;
 
-import guis.Browser;
+import Guis.Browser;
 
 /**
  * Hello world!
