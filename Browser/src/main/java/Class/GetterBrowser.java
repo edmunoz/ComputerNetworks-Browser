@@ -17,7 +17,7 @@ import java.net.Socket;
 import javax.swing.JOptionPane;
 
 /**
- * 
+ *
  * @author Juan Mite
  * @author Esteban Muñoz
  */

@@ -8,6 +8,10 @@ package Guis;
 
 import Class.BContainer;
 import Class.GetterBrowser;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -25,6 +29,17 @@ public class Browser extends javax.swing.JFrame {
     private final ImageIcon ic5 = new ImageIcon("src/main/resources/images/search-icon.png");
     private final ImageIcon ic6 = new ImageIcon("src/main/resources/images/bullet-icon.png");
     private final ImageIcon imgIcon = new ImageIcon ("src/main/resources/images/browser.png");
+    
+    private GetterBrowser html;
+    private String address,source, cookie;
+    private String ip;
+    private final ServerSocket server = null;
+    private final Socket socket = null;   
+    private final boolean processing = true;
+    private final BufferedReader reader = null;
+    private final PrintWriter writer = null;
+    private final int port = 9000;
+    
     /**
      * Creates new form browser
      */
@@ -48,33 +63,27 @@ public class Browser extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         btnBack = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtUrl = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         btnBullet = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1046, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 257, Short.MAX_VALUE)
-        );
+        jEditorPane1.setContentType(" \"txt/html;charset=UTF-8\""); // NOI18N
+        jScrollPane1.setViewportView(jEditorPane1);
 
-        jTabbedPane1.addTab("Nueva pestaña", jPanel1);
+        jTabbedPane1.addTab("tab1", jScrollPane1);
 
         btnBack.setIcon(ic1
         );
         btnBack.setToolTipText("Back page");
+        btnBack.setContentAreaFilled(false);
         btnBack.setName("bntBack"); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +93,7 @@ public class Browser extends javax.swing.JFrame {
 
         btnNext.setIcon(ic2);
         btnNext.setToolTipText("Next page");
+        btnNext.setContentAreaFilled(false);
         btnNext.setName("btnNext"); // NOI18N
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +103,7 @@ public class Browser extends javax.swing.JFrame {
 
         btnHome.setIcon(ic3);
         btnHome.setToolTipText("go to home");
+        btnHome.setContentAreaFilled(false);
         btnHome.setName("btnRefresh"); // NOI18N
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +114,7 @@ public class Browser extends javax.swing.JFrame {
         btnRefresh.setIcon(ic4
         );
         btnRefresh.setToolTipText("Refresh page");
+        btnRefresh.setContentAreaFilled(false);
         btnRefresh.setName("btnHome"); // NOI18N
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,11 +122,12 @@ public class Browser extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Century Schoolbook L", 0, 24)); // NOI18N
-        jTextField1.setToolTipText("");
+        txtUrl.setFont(new java.awt.Font("Century Schoolbook L", 0, 24)); // NOI18N
+        txtUrl.setToolTipText("");
 
         btnSearch.setIcon(ic5);
         btnSearch.setToolTipText("Search");
+        btnSearch.setContentAreaFilled(false);
         btnSearch.setName("btnSearch"); // NOI18N
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +137,7 @@ public class Browser extends javax.swing.JFrame {
 
         btnBullet.setIcon(ic6);
         btnBullet.setToolTipText("");
+        btnBullet.setContentAreaFilled(false);
         btnBullet.setName("btnHome"); // NOI18N
         btnBullet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,7 +162,7 @@ public class Browser extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)
+                        .addComponent(txtUrl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -165,7 +179,7 @@ public class Browser extends javax.swing.JFrame {
                     .addComponent(btnNext, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRefresh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUrl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBullet, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1)
@@ -193,8 +207,13 @@ public class Browser extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        GetterBrowser m = new GetterBrowser();
-        m.getHtml("");
+//        GetterBrowser m = new GetterBrowser();
+//        m.getHtml("");
+          address = this.txtUrl.getText(); 
+          html = new GetterBrowser();
+          source = html.getHtml(address);
+          this.jEditorPane1.setText(source);
+        //pilaAtras.push(address);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnBulletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBulletActionPerformed
@@ -210,8 +229,9 @@ public class Browser extends javax.swing.JFrame {
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtUrl;
     // End of variables declaration//GEN-END:variables
 }

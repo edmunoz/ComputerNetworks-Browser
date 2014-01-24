@@ -36,7 +36,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="btnRefresh" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" max="32767" attributes="0"/>
+                      <Component id="txtUrl" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="btnSearch" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -57,7 +57,7 @@
                   <Component id="btnNext" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="btnHome" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="btnRefresh" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
+                  <Component id="txtUrl" alignment="0" min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="btnBullet" min="-2" pref="56" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -72,27 +72,26 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Nueva pesta&#xf1;a">
-                <Property name="tabTitle" type="java.lang.String" value="Nueva pesta&#xf1;a"/>
+              <JTabbedPaneConstraints tabName="tab1">
+                <Property name="tabTitle" type="java.lang.String" value="tab1"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1046" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="257" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JEditorPane" name="jEditorPane1">
+              <Properties>
+                <Property name="contentType" type="java.lang.String" value=" &quot;txt/html;charset=UTF-8&quot;" noResource="true"/>
+              </Properties>
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>
@@ -102,6 +101,7 @@
           <Connection code="ic1&#xa;        " type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Back page"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="bntBack" noResource="true"/>
       </Properties>
       <Events>
@@ -114,6 +114,7 @@
           <Connection code="ic2" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Next page"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnNext" noResource="true"/>
       </Properties>
       <Events>
@@ -126,6 +127,7 @@
           <Connection code="ic3" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="go to home"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnRefresh" noResource="true"/>
       </Properties>
       <Events>
@@ -138,13 +140,14 @@
           <Connection code="ic4&#xa;        " type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Refresh page"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnHome" noResource="true"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txtUrl">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Schoolbook L" size="24" style="0"/>
@@ -158,6 +161,7 @@
           <Connection code="ic5" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Search"/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnSearch" noResource="true"/>
       </Properties>
       <Events>
@@ -170,6 +174,7 @@
           <Connection code="ic6" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="contentAreaFilled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="btnHome" noResource="true"/>
       </Properties>
       <Events>
