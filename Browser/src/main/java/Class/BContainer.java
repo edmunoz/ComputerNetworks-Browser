@@ -26,7 +26,7 @@ public class BContainer extends Container{
     }    
     
 /**
- * Method painting in the background of a JFrame an image.
+ * Method painting in the background of a JFrame an image do by @author Juan Mite.
  * @param g object of type Graphics helping to get the coordinates for painting.
  */
     @Override

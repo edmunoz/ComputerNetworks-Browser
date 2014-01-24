@@ -21,7 +21,12 @@ public class Main {
  *  Constructor method of the main class.
  *  @param args[] 
  */
+    
+
     public static void main(String args[]){
+            System.setProperty("http.proxyHost", "127.0.0.1");
+            System.setProperty("http.proxyPort", "8182");
+        
          // TODO code application logic here
           try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");

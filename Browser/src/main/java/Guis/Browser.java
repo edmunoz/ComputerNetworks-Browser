@@ -6,20 +6,25 @@
 
 package Guis;
 
+import java.util.LinkedList;
+
 import Class.BContainer;
 import Class.GetterBrowser;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 /**
  * @author Esteban Muñoz
  * @author Juan Mite
  */
+@SuppressWarnings("serial")
 public class Browser extends javax.swing.JFrame {
     
-    Loading html;
-    String direccion,fuente;
+    Loading html1;
+    GetterBrowser html;
+    String direccion,fuente, cookie;
     //Used for the design of the interface
     private final ImageIcon ic1 = new ImageIcon("src/main/resources/images/back-icon.png");
     private final ImageIcon ic2 = new ImageIcon("src/main/resources/images/next-icon.png");
@@ -118,7 +123,7 @@ public class Browser extends javax.swing.JFrame {
         });
 
         jTextField1.setFont(new java.awt.Font("Century Schoolbook L", 0, 24)); // NOI18N
-        jTextField1.setToolTipText("");
+        jTextField1.setToolTipText("Url..");
 
         btnSearch.setIcon(ic5);
         btnSearch.setToolTipText("Search");
@@ -130,7 +135,7 @@ public class Browser extends javax.swing.JFrame {
         });
 
         btnBullet.setIcon(ic6);
-        btnBullet.setToolTipText("");
+        btnBullet.setToolTipText("Save page!");
         btnBullet.setName("btnHome"); // NOI18N
         btnBullet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,21 +186,79 @@ public class Browser extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    LinkedList Forward = new LinkedList();
+    LinkedList Back = new LinkedList();
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        if(!Back.isEmpty()){
+            direccion = Back.pop().toString();
+            jTextField1.setText(direccion);
+            html = new GetterBrowser();
+            fuente = html.getHtml(direccion);
+
+
+            jTextPane1.setContentType("text/html");
+            jScrollPane1.getViewport().add(jTextPane1);
+            getContentPane().add(jScrollPane1);
+            jTextPane1.setText(fuente);
+            Forward.push(direccion);
+       }
+       else JOptionPane.showMessageDialog(null,"¡No existen mas páginas visitadas!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
+    
+    	
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
+        
+         if(!Forward.isEmpty()){        
+                direccion = Forward.pop().toString();
+                jTextField1.setText(direccion);
+                html = new GetterBrowser();
+                fuente = html.getHtml(direccion);
+        
+                jTextPane1.setContentType("text/html");
+                jScrollPane1.getViewport().add(jTextPane1);
+                getContentPane().add(jScrollPane1);
+                jTextPane1.setText(fuente);
+                Back.push(direccion);
+        }
+        else JOptionPane.showMessageDialog(null,"¡No existen mas páginas visitadas!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
+        Back.push(direccion);    
+        this.jTextField1.setText("www.yahoo.com");
+        
+        html = new GetterBrowser();
+        fuente = html.getHtml("www.yahoo.com");
+            
+        jScrollPane1.getViewport().add(jTextPane1);
+        getContentPane().add(jScrollPane1);
+        jTextPane1.setText(fuente);
+    	Back.push(direccion); 
+    	
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
+    	
+         jScrollPane1.getViewport().add(jTextPane1);
+         getContentPane().add(jScrollPane1);
+         jTextPane1.setText("");
+         direccion = jTextField1.getText();
+        
+         html = new GetterBrowser();
+         fuente = html.getHtml(direccion);
+         
+         jScrollPane1.getViewport().add(jTextPane1);
+         getContentPane().add(jScrollPane1);
+         jTextPane1.setText(fuente);
+         Back.push(direccion);
+        
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -204,17 +267,21 @@ public class Browser extends javax.swing.JFrame {
         m.getHtml(direccion);
         
         direccion = jTextField1.getText();
-         html = new Loading();
-         fuente = m.getHtml(direccion);
+        html1 = new Loading();
+        fuente = m.getHtml(direccion);
          
-         jScrollPane1.getViewport().add(jTextPane1);
-         getContentPane().add(jScrollPane1);
-         jTextPane1.setText(fuente);
+        jScrollPane1.getViewport().add(jTextPane1);
+        getContentPane().add(jScrollPane1);
+        jTextPane1.setText(fuente);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnBulletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBulletActionPerformed
-        GetterBrowser m = new GetterBrowser();
-        m.writeCookie("localhost", "");
+        direccion = jTextField1.getText();
+        html = new GetterBrowser();
+        fuente = html.getHtml(direccion);
+        html.savePage(direccion, fuente);
+        JOptionPane.showMessageDialog(null,"¡Página guardada!",""+direccion,JOptionPane.INFORMATION_MESSAGE);
+  
     }//GEN-LAST:event_btnBulletActionPerformed
 
 

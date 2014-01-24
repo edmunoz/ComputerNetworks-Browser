@@ -20,6 +20,10 @@ import javax.swing.JOptionPane;
  * 
  * @author Juan Mite
  * @author Esteban Muñoz
+ * This class is the Browser engine, setup the connection
+ * using sockets, get the html that response the server
+ * save the cookie of the each page
+ * and save the pages in a html file.
  */
 public class GetterBrowser{
     public String line="";
@@ -28,7 +32,7 @@ public class GetterBrowser{
         
 /**
  * 
- * @param address
+ * @param address Ip address
  */
    public String getHtml(String address) {
 
@@ -95,8 +99,8 @@ public class GetterBrowser{
    
 /**
  * 
- * @param host
- * @param cookie
+ * @param host or server where we do the request
+ * @param cookie the text that represent the cookies
  */
    public void writeCookie(String host, String cookie){
         File f;
@@ -116,8 +120,8 @@ public class GetterBrowser{
          
 /**
  * 
- * @param host
- * @param html
+ * @param host or server where we do the request
+ * @param html the file format
  */
     public void savePage(String host, String html){
         File f;
