@@ -14,7 +14,11 @@ import javax.swing.ImageIcon;
  * @author Juan Mite
  */
 public class BContainer extends Container{
-    private ImageIcon image; 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ImageIcon image; 
     
 /**
  * BContainer class that inherits from a modal

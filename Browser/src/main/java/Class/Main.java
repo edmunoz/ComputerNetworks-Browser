@@ -24,20 +24,19 @@ public class Main {
     
 
     public static void main(String args[]){
-            System.setProperty("http.proxyHost", "127.0.0.1");
-            System.setProperty("http.proxyPort", "8182");
+
         
          // TODO code application logic here
           try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Browser", JOptionPane.ERROR_MESSAGE);           
+            //JOptionPane.showMessageDialog(null, ex.getMessage(), "Browser", JOptionPane.ERROR_MESSAGE);           
         } catch (InstantiationException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Browser", JOptionPane.ERROR_MESSAGE);            
+            //JOptionPane.showMessageDialog(null, ex.getMessage(), "Browser", JOptionPane.ERROR_MESSAGE);            
         } catch (IllegalAccessException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Browser", JOptionPane.ERROR_MESSAGE);  
+            //JOptionPane.showMessageDialog(null, ex.getMessage(), "Browser", JOptionPane.ERROR_MESSAGE);  
         } catch (UnsupportedLookAndFeelException ex) {            
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Browser", JOptionPane.ERROR_MESSAGE);  
+            //JOptionPane.showMessageDialog(null, ex.getMessage(), "Browser", JOptionPane.ERROR_MESSAGE);  
         }        
         Loading vt = new Loading();
         vt.start();       
