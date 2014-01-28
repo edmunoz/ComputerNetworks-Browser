@@ -72,9 +72,11 @@ public class GetterBrowser{
 	            line = reader.readLine();
 	   
 	            while (reader.ready()) { // For when it is not receiving anything.
+                      
 	                line = reader.readLine();
-	                html += line+"\n";
-	                if(line.startsWith("Set-Cookie:")){
+                        if(line.startsWith("<"))
+                            html += line+"\n";
+                        if(line.startsWith("Set-Cookie:")){
 	                    cookie = cookie+line+"\n";
 	                    writeCookie(host,cookie);
 	                }

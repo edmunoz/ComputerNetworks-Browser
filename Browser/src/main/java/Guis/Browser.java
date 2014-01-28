@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Guis;
 
 import java.util.LinkedList;
@@ -14,6 +13,8 @@ import javax.swing.JOptionPane;
 
 import Class.BContainer;
 import Class.GetterBrowser;
+import java.awt.Component;
+import javax.swing.JTextField;
 
 
 /**
@@ -75,7 +76,8 @@ public class Browser extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("tab1", jScrollPane1);
 
-        btnBack.setIcon(ic1);
+        btnBack.setIcon(ic1
+        );
         btnBack.setToolTipText("Back page");
         btnBack.setContentAreaFilled(false);
         btnBack.setName("bntBack"); // NOI18N
@@ -96,7 +98,7 @@ public class Browser extends javax.swing.JFrame {
         });
 
         btnHome.setIcon(ic3);
-        btnHome.setToolTipText("Refresh");
+        btnHome.setToolTipText("go to home");
         btnHome.setContentAreaFilled(false);
         btnHome.setName("btnRefresh"); // NOI18N
         btnHome.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +107,8 @@ public class Browser extends javax.swing.JFrame {
             }
         });
 
-        btnRefresh.setIcon(ic4);
+        btnRefresh.setIcon(ic4
+        );
         btnRefresh.setToolTipText("Refresh page");
         btnRefresh.setContentAreaFilled(false);
         btnRefresh.setName("btnHome"); // NOI18N
@@ -116,7 +119,7 @@ public class Browser extends javax.swing.JFrame {
         });
 
         txtUrl.setFont(new java.awt.Font("Century Schoolbook L", 0, 24)); // NOI18N
-        txtUrl.setToolTipText("Url...");
+        txtUrl.setToolTipText("");
 
         btnSearch.setIcon(ic5);
         btnSearch.setToolTipText("Search");
@@ -129,9 +132,9 @@ public class Browser extends javax.swing.JFrame {
         });
 
         btnBullet.setIcon(ic6);
-        btnBullet.setToolTipText("");
+        btnBullet.setToolTipText("Save Page");
         btnBullet.setContentAreaFilled(false);
-        btnBullet.setName("btnHome"); // NOI18N
+        btnBullet.setName("btnSave"); // NOI18N
         btnBullet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBulletActionPerformed(evt);
@@ -188,14 +191,17 @@ public class Browser extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         if(!Back.isEmpty()){
-        	direccion=txtUrl.getText();
-        	txtUrl.setText("");
-            Forward.push(direccion);
-            String direccionNueva=Back.pop();
-            txtUrl.setText(direccionNueva);
-            html = new GetterBrowser();
-            source = html.getHtml(direccion);
-            jEditorPane1.setText(source);
+        direccion = Back.pop().toString();
+         txtUrl.setText(direccion);
+         html = new GetterBrowser();
+         fuente = html.getHtml(direccion);
+        
+         
+        jEditorPane1.setContentType("text/html");
+        jScrollPane1.getViewport().add(jEditorPane1);
+        getContentPane().add(jScrollPane1);
+        jEditorPane1.setText(fuente);
+        Forward.push(direccion);
        }
        else JOptionPane.showMessageDialog(null,"¡No existen mas páginas visitadas!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
     
@@ -206,7 +212,7 @@ public class Browser extends javax.swing.JFrame {
         // TODO add your handling code here:
         	
          if(!Forward.isEmpty()){   
-        	 	direccion=txtUrl.getText();
+        	direccion=txtUrl.getText();
                 Back.push(direccion);
                 direccion=Forward.pop();
                 txtUrl.setText(direccion);
@@ -220,38 +226,33 @@ public class Browser extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        direccion = "www.yahoo.com"; 
+        direccion = "www.yahoo.com";
+        Back.push(direccion);
         txtUrl.setText(direccion);
         html = new GetterBrowser();
         source = html.getHtml(direccion);
         jEditorPane1.setText(source);
-        Back.push(direccion);
-    	
+           	
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
-    	 direccion = txtUrl.getText();
-         jEditorPane1.setText("");
-                 
-         html = new GetterBrowser();
-         fuente = html.getHtml(direccion);
-         
-         jEditorPane1.setContentType("text/html");
-         jScrollPane1.getViewport().add(jEditorPane1);
-         getContentPane().add(jScrollPane1);
-         jEditorPane1.setText(fuente);
-         Back.push(direccion);
-        
+          direccion = txtUrl.getText();
+          Back.push(direccion);
+          html = new GetterBrowser();
+          source = html.getHtml(direccion);
+          jEditorPane1.setContentType("text/html");
+          jEditorPane1.setText(source);
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-          direccion = txtUrl.getText(); 
+          direccion = txtUrl.getText();
+          Back.push(direccion);
           html = new GetterBrowser();
           source = html.getHtml(direccion);
+          jEditorPane1.setContentType("text/html");
           jEditorPane1.setText(source);
-          Back.push(direccion);
 
     }//GEN-LAST:event_btnSearchActionPerformed
 
