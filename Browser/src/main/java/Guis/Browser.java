@@ -14,6 +14,9 @@ import javax.swing.JOptionPane;
 import Class.BContainer;
 import Class.GetterBrowser;
 import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JTextField;
 
 
@@ -36,6 +39,7 @@ public class Browser extends javax.swing.JFrame {
     
     private GetterBrowser html;
     private String address,source, fuente, direccion;
+    private int portFttp;
      
    /**
      * Creates new form browser
@@ -45,10 +49,15 @@ public class Browser extends javax.swing.JFrame {
         BContainer contenedor = new BContainer("src/main/resources/images/fondo.jpg");
         setContentPane(contenedor);
         initComponents();
+        jEditorPane1.setContentType("text/html");
         
         this.setIconImage(imgIcon.getImage());
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,6 +77,9 @@ public class Browser extends javax.swing.JFrame {
         txtUrl = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         btnBullet = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,6 +132,11 @@ public class Browser extends javax.swing.JFrame {
 
         txtUrl.setFont(new java.awt.Font("Century Schoolbook L", 0, 24)); // NOI18N
         txtUrl.setToolTipText("");
+        txtUrl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUrlKeyReleased(evt);
+            }
+        });
 
         btnSearch.setIcon(ic5);
         btnSearch.setToolTipText("Search");
@@ -141,6 +158,21 @@ public class Browser extends javax.swing.JFrame {
             }
         });
 
+        jMenu1.setLabel("Change Port");
+
+        jMenuItem1.setText("Port");
+        jMenuItem1.setToolTipText("");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,7 +190,7 @@ public class Browser extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                        .addComponent(txtUrl, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -178,7 +210,7 @@ public class Browser extends javax.swing.JFrame {
                     .addComponent(txtUrl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBullet, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -196,10 +228,14 @@ public class Browser extends javax.swing.JFrame {
          html = new GetterBrowser();
          fuente = html.getHtml(direccion);
         
-         
+         this.txtUrl.addKeyListener(new KeyAdapter() {
+             public void keyReleased(java.awt.event.KeyEvent evt) {
+                 if (evt.getKeyCode()==KeyEvent.VK_ENTER)
+                     JOptionPane.showMessageDialog(null,"¡Presionó Enter!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
+        
+} 
+             });
         jEditorPane1.setContentType("text/html");
-        jScrollPane1.getViewport().add(jEditorPane1);
-        getContentPane().add(jScrollPane1);
         jEditorPane1.setText(fuente);
         Forward.push(direccion);
        }
@@ -226,7 +262,7 @@ public class Browser extends javax.swing.JFrame {
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        direccion = "www.yahoo.com";
+        direccion = "www.eluniverso.com";
         Back.push(direccion);
         txtUrl.setText(direccion);
         html = new GetterBrowser();
@@ -237,7 +273,13 @@ public class Browser extends javax.swing.JFrame {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
+        jEditorPane1.setText(source);
+        
           direccion = txtUrl.getText();
+          txtUrl.setText(" ");
+          jEditorPane1.setText("");
+          txtUrl.setText(direccion);
+          
           Back.push(direccion);
           html = new GetterBrowser();
           source = html.getHtml(direccion);
@@ -265,7 +307,27 @@ public class Browser extends javax.swing.JFrame {
   
     }//GEN-LAST:event_btnBulletActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        try {
+           this.portFttp = Integer.parseInt(JOptionPane.showInputDialog("Would you like to set the port?\nWhat port want to set?"));     
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void txtUrlKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUrlKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER)
+            JOptionPane.showMessageDialog(null,"¡Presionó Enter!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
+       
+    }//GEN-LAST:event_txtUrlKeyReleased
+
+        
+    
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBullet;
@@ -274,8 +336,12 @@ public class Browser extends javax.swing.JFrame {
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JEditorPane jEditorPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField txtUrl;
     // End of variables declaration//GEN-END:variables
+
 }

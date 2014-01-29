@@ -24,7 +24,7 @@ public class Loading extends Thread{
         fondo.setIcon(new ImageIcon(getClass().getResource("/images/cargando.jpg")));
         cargando.add(fondo);
         cargando.setUndecorated(true);
-        cargando.setSize(450,405);
+        cargando.setSize(310,335);
         cargando.getContentPane().setBackground(Color.LIGHT_GRAY);
         cargando.setLocationRelativeTo(null);
         cargando.setVisible(true);
