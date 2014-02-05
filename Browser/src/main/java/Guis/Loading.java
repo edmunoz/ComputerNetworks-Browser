@@ -11,6 +11,7 @@ import javax.swing.*;
  * Class that inherits from a thread 
  * and can simulate the load of the project.
  * @author Esteban Muñoz
+ * @author Edwin Hermenejildo
  */
 public class Loading extends Thread{
      JFrame cargando=new JFrame();

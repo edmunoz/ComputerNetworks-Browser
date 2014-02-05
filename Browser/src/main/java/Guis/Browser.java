@@ -6,28 +6,26 @@
 package Guis;
 
 import java.util.LinkedList;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import Class.BContainer;
 import Class.GetterBrowser;
-import java.awt.Component;
+import java.awt.HeadlessException;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JTextField;
-
+import javax.swing.JEditorPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 /**
+ * Class used to create the interface for the browser.
  * @author Esteban Muñoz
  * @author Juan Mite
+ * @author Edwin Hermenejildo
  */
 @SuppressWarnings("serial")
-public class Browser extends javax.swing.JFrame {
-     
-    
+public class Browser extends javax.swing.JFrame {   
     //Used for the design of the interface
     private final ImageIcon ic1 = new ImageIcon("src/main/resources/images/back-icon.png");
     private final ImageIcon ic2 = new ImageIcon("src/main/resources/images/next-icon.png");
@@ -38,26 +36,28 @@ public class Browser extends javax.swing.JFrame {
     private final ImageIcon imgIcon = new ImageIcon ("src/main/resources/images/browser.png");
     
     private GetterBrowser html;
-    private String address,source, fuente, direccion;
-    private int portFttp;
+    private String address,source;
+   
+    private LinkedList <String> Forward = new LinkedList<String>();
+    private LinkedList<String> Back = new LinkedList<String>();
+    
+    
+    
+
+    
      
    /**
      * Creates new form browser
      */
-    public Browser() {
-        
+    public Browser() {       
         BContainer contenedor = new BContainer("src/main/resources/images/fondo.jpg");
         setContentPane(contenedor);
         initComponents();
-        jEditorPane1.setContentType("text/html");
-        
+        jEditorPane1.setContentType("text/html");        
         this.setIconImage(imgIcon.getImage());
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    }
-    
-    
-    
-    
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,9 +79,16 @@ public class Browser extends javax.swing.JFrame {
         btnBullet = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jEditorPane1.setContentType(" \"txt/html;charset=UTF-8\""); // NOI18N
         jScrollPane1.setViewportView(jEditorPane1);
@@ -158,9 +165,20 @@ public class Browser extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setLabel("Change Port");
+        jMenuBar1.setBackground(new java.awt.Color(222, 195, 168));
 
-        jMenuItem1.setText("Port");
+        jMenu1.setText("Options");
+        jMenu1.setToolTipText("");
+
+        jMenuItem2.setText("New page");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem1.setText("Delete page");
         jMenuItem1.setToolTipText("");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,57 +234,51 @@ public class Browser extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    LinkedList <String> Forward = new LinkedList<String>();
-    LinkedList<String> Back = new LinkedList<String>();
-
+  
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         if(!Back.isEmpty()){
-        direccion = Back.pop().toString();
-         txtUrl.setText(direccion);
-         html = new GetterBrowser();
-         fuente = html.getHtml(direccion);
-        
-         this.txtUrl.addKeyListener(new KeyAdapter() {
-             public void keyReleased(java.awt.event.KeyEvent evt) {
-                 if (evt.getKeyCode()==KeyEvent.VK_ENTER)
-                     JOptionPane.showMessageDialog(null,"¡Presionó Enter!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
-        
-} 
-             });
-        jEditorPane1.setContentType("text/html");
-        jEditorPane1.setText(fuente);
-        Forward.push(direccion);
+            address = Back.pop().toString();
+            txtUrl.setText(address);
+            html = new GetterBrowser();
+            source = html.getHtml(address);
+            this.txtUrl.addKeyListener(new KeyAdapter() {
+                public void keyReleased(java.awt.event.KeyEvent evt) {
+                    if (evt.getKeyCode()==KeyEvent.VK_ENTER)
+                        JOptionPane.showMessageDialog(null,"¡Presionó Enter!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
+                }
+            });
+            jEditorPane1.setContentType("text/html");
+            jEditorPane1.setText(source);
+            Forward.push(address);
        }
-       else JOptionPane.showMessageDialog(null,"¡No existen mas páginas visitadas!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
-    
-    	
+       else JOptionPane.showMessageDialog(null,"¡No existen mas páginas visitadas!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);        
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
         	
          if(!Forward.isEmpty()){   
-        	direccion=txtUrl.getText();
-                Back.push(direccion);
-                direccion=Forward.pop();
-                txtUrl.setText(direccion);
+        	address=txtUrl.getText();
+                Back.push(address);
+                address=Forward.pop();
+                txtUrl.setText(address);
                 html = new GetterBrowser();
-                source = html.getHtml(direccion);
+                source = html.getHtml(address);
                 jEditorPane1.setText(source);
-                Back.push(direccion);
+                Back.push(address);
         }
         else JOptionPane.showMessageDialog(null,"¡No existen mas páginas visitadas!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         // TODO add your handling code here:
-        direccion = "www.eluniverso.com";
-        Back.push(direccion);
-        txtUrl.setText(direccion);
+        address = "www.eluniverso.com";
+        Back.push(address);
+        txtUrl.setText(address);
         html = new GetterBrowser();
-        source = html.getHtml(direccion);
+        source = html.getHtml(address);
+        jTabbedPane1.setTitleAt(i, txtUrl.getText());
         jEditorPane1.setText(source);
            	
     }//GEN-LAST:event_btnHomeActionPerformed
@@ -274,28 +286,25 @@ public class Browser extends javax.swing.JFrame {
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
         jEditorPane1.setText(source);
-        
-          direccion = txtUrl.getText();
-          txtUrl.setText(" ");
-          jEditorPane1.setText("");
-          txtUrl.setText(direccion);
-          
-          Back.push(direccion);
-          html = new GetterBrowser();
-          source = html.getHtml(direccion);
-          jEditorPane1.setContentType("text/html");
-          jEditorPane1.setText(source);
+        address = txtUrl.getText();
+        txtUrl.setText(" ");
+        jEditorPane1.setText("");
+        txtUrl.setText(address);
+        Back.push(address);
+        html = new GetterBrowser();
+        source = html.getHtml(address);
+        jEditorPane1.setContentType("text/html");
+        jEditorPane1.setText(source);
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-          direccion = txtUrl.getText();
-          Back.push(direccion);
-          html = new GetterBrowser();
-          source = html.getHtml(direccion);
-          jEditorPane1.setContentType("text/html");
-          jEditorPane1.setText(source);
-
+        address = txtUrl.getText();
+        Back.push(address);
+        html = new GetterBrowser();
+        source = html.getHtml(address);
+        jEditorPane1.setContentType("text/html");
+        jEditorPane1.setText(source);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnBulletActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBulletActionPerformed
@@ -303,30 +312,47 @@ public class Browser extends javax.swing.JFrame {
         html = new GetterBrowser();
         source = html.getHtml(address);
         html.savePage(address, source);
-        JOptionPane.showMessageDialog(null,"¡Página guardada!",""+address,JOptionPane.INFORMATION_MESSAGE);
-  
+        JOptionPane.showMessageDialog(null,"¡Página guardada!",""+address,JOptionPane.INFORMATION_MESSAGE);  
     }//GEN-LAST:event_btnBulletActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        try {
-           this.portFttp = Integer.parseInt(JOptionPane.showInputDialog("Would you like to set the port?\nWhat port want to set?"));     
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e.getMessage());
-        }        
+        // TODO add your handling code here
+      jTabbedPane1.removeTabAt(i);
+     
+             
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+int i =0;
     private void txtUrlKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUrlKeyReleased
         // TODO add your handling code here:
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER)
-            JOptionPane.showMessageDialog(null,"¡Presionó Enter!","¡Hey espera!",JOptionPane.INFORMATION_MESSAGE);
-       
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+            address = txtUrl.getText();
+            Back.push(address);
+            html = new GetterBrowser();
+            source = html.getHtml(address);//     
+            jTabbedPane1.setTitleAt(i, txtUrl.getText());          
+            JScrollPane jsp=(JScrollPane)jTabbedPane1.getComponentAt(i);
+            JEditorPane jep = new JEditorPane();
+            jsp.getViewport().add(jep);
+            jep.setContentType("text/html");
+            jep.setText(source);   
+//       
+        }    
     }//GEN-LAST:event_txtUrlKeyReleased
 
-        
-    
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        JScrollPane eventScrollnew = new JScrollPane();
+        JEditorPane eventPanel = new JEditorPane();       
+        eventScrollnew.setViewportView(eventPanel);  
+        jTabbedPane1.addTab("Browser", eventScrollnew);
+            
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+        JTabbedPane jtp =(JTabbedPane) evt.getComponent();   
+        this.i = jtp.getSelectedIndex();               
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -339,6 +365,7 @@ public class Browser extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField txtUrl;

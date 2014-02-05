@@ -7,7 +7,6 @@
 package Class;
 
 import Guis.Loading;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -21,8 +20,6 @@ public class Main {
  *  Constructor method of the main class.
  *  @param args[] 
  */
-    
-
     public static void main(String args[]){
 
         
